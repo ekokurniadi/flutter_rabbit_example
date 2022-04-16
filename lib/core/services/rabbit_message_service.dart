@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:dart_amqp/dart_amqp.dart';
 import 'package:rabbitmq_flutter/main.dart';
@@ -35,8 +36,7 @@ class RabbitMessageService {
       consumer.listen((event) {
         print(
             "[*]->Receive message from queue as json: ${event.payloadAsJson}");
-        controller.sink
-            .add((event.payloadAsJson["data"]["message"]).toString());
+        controller.sink.add(jsonEncode(event.payloadAsJson['data']));
       });
     } catch (e) {
       print(e.toString());

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rabbitmq_flutter/core/cubit/rabbit_messaging/rabbit_messaging_cubit.dart';
+import 'package:rabbitmq_flutter/core/screens/screens.dart';
 
-import 'core/cubit/cubit/router_cubit.dart';
-import 'features/home/presentation/pages/home_second.dart';
+import 'core/cubit/router/router_cubit.dart';
 
 class MainApp extends StatelessWidget {
   const MainApp({Key? key}) : super(key: key);
@@ -19,8 +20,11 @@ class MainApp extends StatelessWidget {
           BlocProvider(
             create: (_) => RouterCubit(),
           ),
+          BlocProvider(
+            create: (_) => RabbitMessagingCubit(),
+          ),
         ],
-        child: const HomeSeccond(),
+        child: const Screens(),
       ),
     );
   }

@@ -10,7 +10,10 @@ class RouterCubit extends Cubit<RouterState> {
     emit(RouterSecondPage());
   }
 
-  void onHomePage() {
+  void onSplashPage() {
     emit(RouterInitial());
+    Future.delayed(const Duration(seconds: 3), () {
+      emit(RouterSecondPage());
+    });
   }
 }
