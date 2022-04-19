@@ -75,7 +75,8 @@ class MessageScreen extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(
-                                            message[index].isSender ? 12 : 0),
+                                          message[index].isSender ? 12 : 0,
+                                        ),
                                         topRight: const Radius.circular(12),
                                         bottomLeft: const Radius.circular(12),
                                         bottomRight: Radius.circular(
