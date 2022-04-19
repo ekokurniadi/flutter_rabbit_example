@@ -1,11 +1,9 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 
-import '../../app.dart';
+import '../../app_config.dart';
 
 class BackgroundServices {
   Future<void> onStart() async {
@@ -25,7 +23,8 @@ class BackgroundServices {
         service.stopBackgroundService();
       }
     });
-    App().init;
+
+    await AppConfig().rabbitInitial();
 
     // bring to foreground
     service.setForegroundMode(true);
@@ -41,12 +40,9 @@ class BackgroundServices {
         {"current_date": DateTime.now().toIso8601String()},
       );
     });
-
-    dispose(service);
   }
 
   void dispose(FlutterBackgroundService service) {
-    print("dispose service");
     service.dispose();
   }
 }

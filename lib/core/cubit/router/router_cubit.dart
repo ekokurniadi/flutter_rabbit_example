@@ -6,14 +6,16 @@ part 'router_state.dart';
 class RouterCubit extends Cubit<RouterState> {
   RouterCubit() : super(RouterInitial());
 
-  void onSecondPage() {
-    emit(RouterSecondPage());
-  }
+  void onMessagePage() async => emit(RouterOnMessagePage());
 
-  void onSplashPage() {
+  void onSplashPage() async {
     emit(RouterInitial());
     Future.delayed(const Duration(seconds: 3), () {
-      emit(RouterSecondPage());
+      emit(RouterOnMessagePage());
     });
   }
+
+  void onLoginPage() async => emit(RouterOnLoginPage());
+
+  void onRegisterPage() async => emit(RouterOnRegisterPage());
 }

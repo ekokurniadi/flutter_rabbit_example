@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:rabbitmq_flutter/core/cubit/rabbit_messaging/rabbit_messaging_cubit.dart';
-import 'package:rabbitmq_flutter/core/helper/theme_helper.dart';
-import 'package:rabbitmq_flutter/features/home/data/models/message_model.dart';
+import '../../../../core/cubit/rabbit_messaging/rabbit_messaging_cubit.dart';
+import '../../../../core/helper/theme_helper.dart';
+import '../../data/models/message_model.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({Key? key}) : super(key: key);
@@ -41,11 +41,13 @@ class MessageScreen extends StatelessWidget {
                 Expanded(
                   child: message.isEmpty
                       ? Center(
-                          child: Text("Chat Masih Kosong",
-                              style: primaryTextStyle.copyWith(
-                                fontWeight: medium,
-                                fontSize: 18,
-                              )),
+                          child: Text(
+                            "Chat Masih Kosong",
+                            style: primaryTextStyle.copyWith(
+                              fontWeight: medium,
+                              fontSize: 18,
+                            ),
+                          ),
                         )
                       : ListView.builder(
                           itemCount: message.length,
@@ -67,7 +69,9 @@ class MessageScreen extends StatelessWidget {
                                               0.6,
                                     ),
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 12),
+                                      horizontal: 16,
+                                      vertical: 12,
+                                    ),
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(
@@ -75,7 +79,8 @@ class MessageScreen extends StatelessWidget {
                                         topRight: const Radius.circular(12),
                                         bottomLeft: const Radius.circular(12),
                                         bottomRight: Radius.circular(
-                                            message[index].isSender ? 0 : 12),
+                                          message[index].isSender ? 0 : 12,
+                                        ),
                                       ),
                                       color: message[index].isSender
                                           ? primaryColor
@@ -91,7 +96,8 @@ class MessageScreen extends StatelessWidget {
                                 )
                               ],
                             );
-                          }),
+                          },
+                        ),
                 ),
               ],
             ),

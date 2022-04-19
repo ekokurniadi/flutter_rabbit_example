@@ -9,4 +9,8 @@ abstract class RouterState extends Equatable {
 
 class RouterInitial extends RouterState {}
 
-class RouterSecondPage extends RouterState {}
+class RouterOnMessagePage extends RouterState {}
+
+class RouterOnLoginPage extends RouterState {}
+
+class RouterOnRegisterPage extends RouterState {}

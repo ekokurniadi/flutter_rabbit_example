@@ -1,17 +1,16 @@
 // ignore_for_file: avoid_function_literals_in_foreach_calls
 
-import 'package:rabbitmq_flutter/core/config/database/database_connection.dart';
-import 'package:rabbitmq_flutter/core/helper/constant_helper.dart';
-import 'package:rabbitmq_flutter/injection_container.dart';
 import 'package:sqflite/sqflite.dart';
-
+import '../config/database/database_connection.dart';
+import '../helper/constant_helper.dart';
+import '../../injection_container.dart';
 import 'object_entity.dart';
 
-abstract class ORM<T extends ObjectEntity> {
+abstract class QueryBuilder<T extends ObjectEntity> {
   /// set table name for used on many repository
   String get tableName;
 
-  ORM() {
+  QueryBuilder() {
     ormBehaviorRelation();
   }
 

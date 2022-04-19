@@ -1,4 +1,4 @@
-import 'package:rabbitmq_flutter/features/home/domain/entity.dart';
+import '../../domain/entity.dart';
 
 class MessageModel extends MessageEntity {
   const MessageModel({required bool isSender, required String message})

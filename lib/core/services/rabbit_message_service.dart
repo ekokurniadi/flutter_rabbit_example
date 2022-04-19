@@ -4,14 +4,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dart_amqp/dart_amqp.dart';
-import 'package:rabbitmq_flutter/main.dart';
+import '../helper/constant_helper.dart';
+import '../../main.dart';
 
 class RabbitMessageService {
   Future<void> startService() async {
     print("rabbit messaging is starting");
-
     ConnectionSettings settings = ConnectionSettings(
-        host: "192.168.144.1",
+        host: ConstantHelper.RABBITMQ_HOST,
+        port: ConstantHelper.RABBITMQ_PORT,
+        reconnectWaitTime: const Duration(milliseconds: 1500),
         authProvider: const PlainAuthenticator("guest", "guest"));
 
     Client client = Client(settings: settings);
@@ -35,10 +37,11 @@ class RabbitMessageService {
 
       consumer.listen((event) {
         print(
-            "[*]->Receive message from queue as json: ${event.payloadAsJson}");
+          "[*]Receive message from queue as json: ${event.payloadAsJson}",
+        );
         controller.sink.add(jsonEncode(event.payloadAsJson['data']));
       });
-    } catch (e) {
+    } on ConnectionException catch (e) {
       print(e.toString());
     }
   }

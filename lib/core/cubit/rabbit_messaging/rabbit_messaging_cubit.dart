@@ -3,9 +3,9 @@ import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rabbitmq_flutter/app.dart';
-import 'package:rabbitmq_flutter/features/home/data/models/message_model.dart';
-import 'package:rabbitmq_flutter/main.dart';
+import '../../../app_config.dart';
+import '../../../features/home/data/models/message_model.dart';
+import '../../../main.dart';
 
 part 'rabbit_messaging_state.dart';
 
@@ -15,7 +15,7 @@ class RabbitMessagingCubit extends Cubit<RabbitMessagingState> {
   late StreamSubscription<String> _subscription;
 
   Future<void> startStream() async {
-    App().init();
+    AppConfig().rabbitInitial();
     _subscription = output.listen((data) {
       emit(RabbitMessagingStreamComplete(
           amqpData: MessageModel.fromJSON(json.decode(data))));

@@ -1,4 +1,4 @@
-import 'package:rabbitmq_flutter/features/home/data/models/message_model.dart';
+import 'message_model.dart';
 
 class ListMessageModel {
   List<MessageModel>? listMessageModel;
