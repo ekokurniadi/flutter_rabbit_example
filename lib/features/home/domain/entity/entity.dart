@@ -1,14 +1,15 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class MessageEntity extends Equatable {
   final bool isSender;
   final String message;
   final String messageID;
   final String receiver;
   final String receiverName;
-  final String sender;
-  final String senderName;
-  const MessageEntity({
+  String sender;
+  String senderName;
+  MessageEntity({
     required this.isSender,
     required this.message,
     required this.messageID,

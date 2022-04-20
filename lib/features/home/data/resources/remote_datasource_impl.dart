@@ -13,7 +13,8 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     String? receiver,
     String? sender,
     String? messageID,
-    String? isSender,
+    bool? isSender,
+    String? recevierName,
   }) async {
     MessageModel messageModel;
 
@@ -24,7 +25,8 @@ class RemoteDataSourceImpl extends RemoteDataSource {
         "receiver": receiver,
         "sender": sender,
         "messageID": messageID,
-        "isSender": isSender
+        "isSender": isSender,
+        "receiverName": recevierName,
       });
       messageModel = MessageModel.fromJSON(response.data["data"]);
       return Right(messageModel);

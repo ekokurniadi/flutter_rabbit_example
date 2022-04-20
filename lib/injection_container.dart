@@ -1,4 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:rabbitmq_flutter/features/home/data/repository/message_repository_impl.dart';
+import 'package:rabbitmq_flutter/features/home/data/resources/local_datasource.dart';
+import 'package:rabbitmq_flutter/features/home/data/resources/local_datasource_impl.dart';
+import 'package:rabbitmq_flutter/features/home/data/resources/remote_datasource.dart';
+import 'package:rabbitmq_flutter/features/home/data/resources/remote_datasource_impl.dart';
+import 'package:rabbitmq_flutter/features/home/domain/repository/message_repository.dart';
 import 'package:rabbitmq_flutter/features/home/presentation/cubit/message_cubit.dart';
 
 import 'core/config/database/database_connection.dart';
@@ -27,4 +33,14 @@ Future<void> initial() async {
 
   // core services
   sl.registerLazySingleton(() => RabbitMessageService());
+
+  // repository
+  sl.registerLazySingleton<MessageRepository>(() => MessageRepositoryImpl(
+        remoteDataSource: sl(),
+        localDataSource: sl(),
+      ));
+
+  // datasource
+  sl.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
+  sl.registerLazySingleton<RemoteDataSource>(() => RemoteDataSourceImpl());
 }

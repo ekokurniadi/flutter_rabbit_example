@@ -8,6 +8,7 @@ abstract class RemoteDataSource {
     String? receiver,
     String? sender,
     String? messageID,
-    String? isSender,
+    bool? isSender,
+    String? recevierName,
   });
 }

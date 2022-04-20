@@ -1,7 +1,8 @@
 import '../../domain/entity/entity.dart';
 
+// ignore: must_be_immutable
 class MessageModel extends MessageEntity {
-  const MessageModel({
+  MessageModel({
     required bool isSender,
     required String message,
     required String messageID,

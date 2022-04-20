@@ -8,18 +8,30 @@ class SendMessageUsecases {
   SendMessageUsecases({required this.messageRepositoryImpl});
 
   Future<Either<Failures, MessageModel>> call({
-    String? isSender,
+    bool? isSender,
     String? message,
     String? messageID,
     String? receiver,
     String? sender,
+    String? recevierName,
   }) async {
-    return await messageRepositoryImpl.sendMessage(
-      message: message,
-      receiver: receiver,
-      sender: sender,
-      messageID: messageID,
-      isSender: isSender,
-    );
+    var result = await messageRepositoryImpl.sendMessage(
+        message: message,
+        receiver: receiver,
+        sender: sender,
+        messageID: messageID,
+        isSender: isSender,
+        recevierName: recevierName);
+
+    await messageRepositoryImpl.insertMessageToLocal(MessageModel(
+      isSender: isSender!,
+      message: message!,
+      messageID: messageID!,
+      receiver: receiver!,
+      sender: "",
+      senderName: "",
+      receiverName: recevierName!,
+    ));
+    return result;
   }
 }

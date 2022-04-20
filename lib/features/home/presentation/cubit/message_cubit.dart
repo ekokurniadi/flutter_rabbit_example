@@ -11,7 +11,7 @@ class MessageCubit extends Cubit<MessageState> {
   MessageCubit({required this.sendMessageUsecases}) : super(MessageInitial());
 
   Future<void> sendMessage({
-    String? isSender,
+    bool? isSender,
     String? message,
     String? messageID,
     String? receiver,
