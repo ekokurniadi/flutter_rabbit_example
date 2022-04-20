@@ -1,8 +1,6 @@
-import 'package:rabbitmq_flutter/core/helper/constant_helper.dart';
 import 'package:rabbitmq_flutter/core/helper/shared_preferences_helper.dart';
 import 'package:rabbitmq_flutter/core/object_relational_mapping/object_entity.dart';
 import 'package:rabbitmq_flutter/features/home/data/models/message_model.dart';
-import 'package:sqflite/sqflite.dart';
 
 import '../models/list_message_model.dart';
 import '../../../../core/error/failures.dart';
@@ -11,16 +9,20 @@ import 'local_datasource.dart';
 
 class LocalDataSourceImpl extends LocalDataSource {
   @override
-  Future<List> batch(Function? Function(Batch batch) actions,
-      {String dbConnection = ConstantHelper.DATABASE,
-      bool? exclusive,
-      bool? noResult,
-      bool? continueOnError}) {
+  String get tableName => "messages";
+
+  @override
+  void ormBehaviorRelation() {}
+
+  @override
+  ObjectEntity responseToEntity(Map<String, dynamic>? map) {
     throw UnimplementedError();
   }
 
   @override
-  String get tableName => "messages";
+  ObjectEntity responseToListEntity(Map<String, dynamic>? map) {
+    throw UnimplementedError();
+  }
 
   @override
   Future<Either<Failures, List<ListMessageModel>>> getMessageFromLocal() async {
@@ -51,18 +53,5 @@ class LocalDataSourceImpl extends LocalDataSource {
     } catch (e) {
       return Left(ServerFailures(errorMessage: e.toString()));
     }
-  }
-
-  @override
-  void ormBehaviorRelation() {}
-
-  @override
-  ObjectEntity responseToEntity(Map<String, dynamic>? map) {
-    throw UnimplementedError();
-  }
-
-  @override
-  ObjectEntity responseToListEntity(Map<String, dynamic>? map) {
-    throw UnimplementedError();
   }
 }
