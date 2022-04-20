@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
-
-import '../../app_config.dart';
+import 'package:rabbitmq_flutter/core/services/rabbit_message_service.dart';
 
 class BackgroundServices {
   Future<void> onStart() async {
@@ -24,7 +23,7 @@ class BackgroundServices {
       }
     });
 
-    await AppConfig().rabbitInitial();
+    await RabbitMessageService().startService();
 
     // bring to foreground
     service.setForegroundMode(true);
@@ -40,6 +39,7 @@ class BackgroundServices {
         {"current_date": DateTime.now().toIso8601String()},
       );
     });
+    dispose(service);
   }
 
   void dispose(FlutterBackgroundService service) {

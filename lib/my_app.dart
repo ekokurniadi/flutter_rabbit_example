@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:rabbitmq_flutter/features/home/presentation/cubit/message_cubit.dart';
 
 import 'features/screen_builder/presentation/pages/screen_builder.dart';
 import 'injection_container.dart';
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (_) => sl<RabbitMessagingCubit>(),
+          ),
+          BlocProvider(
+            create: (_) => sl<MessageCubit>(),
           ),
         ],
         child: const ScreenBuilder(),

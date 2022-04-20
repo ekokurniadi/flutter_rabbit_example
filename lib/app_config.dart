@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_flipperkit/flutter_flipperkit.dart';
-import 'package:rabbitmq_flutter/core/config/database/database_connection.dart';
-import 'package:rabbitmq_flutter/core/helper/constant_helper.dart';
-import 'package:rabbitmq_flutter/core/helper/dio_helper.dart';
+import 'core/config/database/database_connection.dart';
+import 'core/helper/constant_helper.dart';
+import 'core/helper/dio_helper.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'injection_container.dart';
@@ -15,11 +15,13 @@ class AppConfig {
   Database? database;
 
   Future<void> rabbitInitial() async {
-    await sl<RabbitMessageService>().startService();
+    RabbitMessageService rabbitMessageService = sl<RabbitMessageService>();
+    await rabbitMessageService.startService();
   }
 
   Future<void> backgroundServiceInitial() async {
-    await sl<BackgroundServices>().onStart();
+    BackgroundServices backgroundServices = BackgroundServices();
+    await backgroundServices.onStart();
   }
 
   Future<void> configure() async {
